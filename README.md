@@ -1,4 +1,4 @@
 # Task-2
-This is a documentation of REST API at backend. This API will be responsible for handling CRUD operations for nudges at backend. 
-
-You can view the API documentation by opening the NudgeRESTApi.yaml file in a swagger editor. 
+This project invloves the craetion and documentation of Api.
+Task-1 invloves the creation of API for CRUD operations of events at backend.
+Task-2 involves the documentation for CRUD operation of nudges.
