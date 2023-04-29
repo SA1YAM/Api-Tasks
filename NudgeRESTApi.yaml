@@ -1,0 +1,211 @@
+openapi: 3.0.3
+info:
+  title: Nudge-RestAPI 
+  description: |-
+    This a document for the Rest API used for CRUD opeartions od nudges in backend .
+  version: 3.0.0
+  
+servers:
+  - url: http://127.0.0.1:5000/api/v3/app
+tags: 
+  - name: Nudges
+    description: Request methods for Nudge
+
+paths:
+  /nudges:
+    post:
+      tags:
+        - Nudges
+      summary: Create Nudge
+      description: Creation of Nudge
+      requestBody:
+        description: Request Body
+        required: True
+        content:
+           multipart/form-data:
+            schema:
+              type: object
+              properties:
+                event:
+                  type: string
+                  example: tagged event of nudge
+                title:
+                  type: string
+                  example: title of nudge
+                image:
+                  type: string
+                  description: uploaded image
+                  format: binary
+                schedule:
+                  type: string
+                  example: 2020-07-02 12:32
+                  format: date-time
+                description:
+                  type: string
+                  example: description of nudge
+                icon:
+                  type: string
+                  description: uploaded icon
+                  format: binary
+                invitation_line:
+                  type: string
+                  example: one line invitation 
+                  
+      responses:
+        '201':
+          description: created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                    example: 2
+                    
+        '400':
+          description: Bad Request
+        
+          
+  /nudges/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+        description: nudge ID
+        
+    get:
+      tags:
+        - Nudges
+      summary: Get Nudge
+      description: Returns the Nudge by nudge id
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Nudge'          
+        '400':
+          description: Bad Request
+        '401':
+          description: Authentication Failed
+          
+    put:
+      tags:
+        - Nudges
+      summary: Edit Nudge
+      description: Modification of Nudge
+      requestBody:
+        description: Request Body
+        required: True
+        content:
+           multipart/form-data:
+            schema:
+              type: object
+              properties:
+                event:
+                  type: string
+                  example: tagged event of nudge
+                title:
+                  type: string
+                  example: title of nudge
+                image:
+                  type: string
+                  description: uploaded image
+                  format: binary
+                schedule:
+                  type: string
+                  example: 2020-07-02 12:32
+                  format: date-time
+                description:
+                  type: string
+                  example: description of nudge
+                icon:
+                  type: string
+                  description: uploaded icon
+                  format: binary
+                invitation_line:
+                  type: string
+                  example: one line invitation 
+                  
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Nudge'  
+                       
+        '400':
+          description: Bad Request
+
+    delete:
+      tags:
+        - Nudges
+      summary: Delete Nudge
+      description: Deletes the Nudge ny nudge Id
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Bad Request
+          
+          
+components:
+  schemas:
+    Nudge:
+      required:
+        - id
+        - type
+        - event
+        - title
+        - image
+        - schedule
+        - description
+        - icon
+        - invitation_line
+        - eid
+
+      type: object
+      properties:
+        id:
+          type: integer
+          description: id of the nudge
+          format: int64
+          example: 1
+        type:
+          type: string
+          example: nudge
+        eid:
+          type: integer
+          description: event id of the tagged event
+          format: int64
+          example: 5
+        event:
+          type: string
+          example: tagged event of nudge
+        title:
+          type: string
+          example: title of nudge
+        image:
+          type: string
+          description: uploaded image
+          format: binary
+        schedule:
+          type: string
+          example: 2020-07-02 12:32
+          format: date-time
+        description:
+          type: string
+          example: description of nudge
+        icon:
+          type: string
+          description: uploaded icon
+          format: binary
+        invitation_line:
+          type: string
+          example: one line invitation 
